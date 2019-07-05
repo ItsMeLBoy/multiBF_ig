@@ -1,6 +1,6 @@
 #!/bin/bash
 #author     	: ./Lolz
-#release	: Friday, July 5, 2019 (GMT+7)	
+#release	: Jum'at 5 juli 2k19	
 #visit      	: https://noolep.net
 #thanks to  	: JavaGhost - Bashid.org - 407AEX
 #recode tinggal recode aja okeh?, tapi cantumin source Y tolol h3h3
