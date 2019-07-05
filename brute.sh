@@ -15,7 +15,7 @@ cyan='\e[1;36m'
 white='\e[1;37m'
 
 #dependencies
-dependencies=( "convert" "curl" )
+dependencies=( "jq" "curl" )
 for i in "${dependencies[@]}"
 do
     command -v $i >/dev/null 2>&1 || {
