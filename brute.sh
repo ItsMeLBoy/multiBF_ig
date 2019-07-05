@@ -42,7 +42,7 @@ function brute(){
             if [[ $login =~ "true" ]]; then
                     echo -e "[${green}+${white}] found ${yellow}(@$i | $pass${yellow})${white}"
                 elif [[ $login =~ "false" ]]; then
-                            echo -e "[${redls}!${white}] @$i - ${red}failed to crack${white}"
+                            echo -e "[${red}!${white}] @$i - ${red}failed to crack${white}"
                     elif [[ $url =~ "checkpoint_required" ]]; then
                             echo -e "[${cyan}?${white}] ${cyan}@$i ${white}: ${yellow}checkpoint${white}"
 
