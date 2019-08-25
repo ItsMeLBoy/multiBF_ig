@@ -68,6 +68,7 @@ case $opt in
                 echo $tag | xargs -P 100 curl -s | grep -o "alternateName.*" | cut -d "@" -f2 | cut -d '"' -f1 >> target &
             done
             wait
+            rm hashtag result
         fi
         ;;
     *) #wrong menu
@@ -107,4 +108,4 @@ function brute(){
     wait
 )
 
-rm target result hashtag
+rm target
