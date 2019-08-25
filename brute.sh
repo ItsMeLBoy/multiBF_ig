@@ -105,4 +105,4 @@ function brute(){
     wait
 )
 
-rm target
+rm target result hashtag
