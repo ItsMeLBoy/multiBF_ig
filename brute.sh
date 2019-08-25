@@ -2,6 +2,7 @@
 #author         : ./Lolz
 #thanks to      : JavaGhost - Bashid.org
 #recode tinggal recode aja okeh?, tapi cantumin source Y tolol h3h3
+#Yamaap kalau scriptnya acak"an:(
 
 #color(bold)
 red='\e[1;31m'
@@ -72,6 +73,7 @@ case $opt in
     *) #wrong menu
         echo -e "${white}options are not on the menu"
         sleep 2
+        clear
         bash brute.sh
 esac
 
