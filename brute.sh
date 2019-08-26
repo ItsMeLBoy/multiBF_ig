@@ -13,7 +13,7 @@ magenta='\e[1;35m'
 cyan='\e[1;36m'
 white='\e[1;37m'
 
-#thread limit
+#thread limit => kurangin lebih kecil angkanya boleh, naikin? saran w jangan... awokwowok:v
 limit=100
 
 #banner
