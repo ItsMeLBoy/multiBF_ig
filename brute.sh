@@ -18,7 +18,12 @@ trap ctrl_c INT
 
 # start function
 function ctrl_c(){
-	rm *.tmp*
+	if [[ ! -e *.tmp* ]]; then
+		echo -e "${white}"
+	else
+		echo -e "${white}"
+		rm *.tmp*
+	fi
 }
 
 # checking run tor
@@ -166,10 +171,10 @@ function brute_force(){
 if [[ ! -e account_success_crack.txt ]]; then
 	echo -e "${white}\n[ ${red}!${white} ] Ups you don't get any account boy :("
 else
-	echo -e "${white}[ ${red}+${white} ] You got : $(< account_success_crack.txt wc -l) accounts instagram"
+	echo -e "${white}[ ${red}+${white} ] You got ${red}:${green} $(< account_success_crack.txt wc -l) accounts instagram${white}"
 fi
 
-echo -ne "${white}[ ${red}?${white} ] Wanna play with me again boy (y/n) : " ; read ask_again
+echo -ne "${white}[ ${red}?${white} ] Wanna play with me again boy ${red}(${white} y/n${red} ) :${green} " ; read ask_again
 if [[ $ask_again == "Y" || $ask_again == "y" ]]; then
 	echo -e "${white}\n[ ${red}+${white} ] Okay good! lets try again boy XD"
 	bash brute.sh
