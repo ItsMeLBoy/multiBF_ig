@@ -9,7 +9,7 @@
 > Installing dependencies
 + $ pkg install curl tor jq
 
-# Run
+> running tools
 + Open new sessions and type command tor
 + Back to dir multiBF_ig and type bash brute.sh
 + Have more question ? contact me : https://fb.me/n00b.me
