@@ -6,7 +6,7 @@
 + Support multiple user + pass
 
 # Run in termux
-# Installing dependencies
+> Installing dependencies
 + $ pkg install curl tor jq
 
 # Run
