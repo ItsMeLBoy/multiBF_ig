@@ -1,5 +1,5 @@
 # multiBF_ig
-* Feature
+> Feature
 + multi thread
 + Just need username instagram
 + Use proxy [ TOR ]
