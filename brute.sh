@@ -26,6 +26,16 @@ function ctrl_c(){
 	fi
 }
 
+# dependencies
+dependencies=( "jq" "curl" "tor" )
+for depen in "${dependencies[@]}"
+do
+    command -v $i >/dev/null 2>&1 || {
+        echo -e >&2 "${white}[ ${red}STOPPED${white} ] ${red}-${white} package ${green}${depen}${white} not installed! ${red}-${white} install by typing the command ${red}:${white} apt install $i -y"
+        exit
+    }
+done
+
 # checking run tor
 check_tor=$(curl --socks5-hostname localhost:9050 -s "https://www.google.com" > /dev/null; echo $?)
 if [[ $check_tor -gt 0 ]]; then
