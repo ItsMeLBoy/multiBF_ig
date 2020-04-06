@@ -1,7 +1,15 @@
 # multiBF_ig
 # Feature
 + multi thread
-+ just requires keywords name
-+ maunya apa lgi? awokwokwok
-# Maybe you dont like this
-+ i'm sorry for limit:v
++ Just need username instagram
++ Use proxy [ TOR ]
++ Support multiple user + pass
+
+# Run in termux
+# Installing dependencies
++ $ pkg install curl tor jq
+
+# Run
++ Open new sessions and type command tor
++ Back to dir multiBF_ig and type bash brute.sh
++ Have more question ? contact me : https://fb.me/n00b.me
