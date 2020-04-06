@@ -13,10 +13,11 @@ magenta='\e[1;35m'
 cyan='\e[1;36m'
 white='\e[1;37m'
 
+# start
 # trap
 trap ctrl_c INT
 
-# start function
+# If user click ctrl + c = program stopped and remove all tmp file in dir multiBF_ig
 function ctrl_c(){
 	if [[ ! -e *.tmp* ]]; then
 		echo -e "${white}"
@@ -178,12 +179,14 @@ function brute_force(){
 	wait
 )
 
+# check got account or not
 if [[ ! -e account_success_crack.txt ]]; then
 	echo -e "${white}\n[ ${red}!${white} ] Ups you don't get any account boy :("
 else
 	echo -e "${white}[ ${red}+${white} ] You got ${red}:${green} $(< account_success_crack.txt wc -l) accounts instagram${white}"
 fi
 
+# asking for run again ot not
 echo -ne "${white}[ ${red}?${white} ] Wanna play with me again boy ${red}(${white} y/n${red} ) :${green} " ; read ask_again
 if [[ $ask_again == "Y" || $ask_again == "y" ]]; then
 	echo -e "${white}[ ${red}+${white} ] Okay good! lets try again boy XD"
@@ -194,3 +197,4 @@ elif [[ $ask_again == "N" || $ask_again == "n" ]]; then
 else
 	rm *.tmp*
 fi
+# end
