@@ -176,10 +176,10 @@ fi
 
 echo -ne "${white}[ ${red}?${white} ] Wanna play with me again boy ${red}(${white} y/n${red} ) :${green} " ; read ask_again
 if [[ $ask_again == "Y" || $ask_again == "y" ]]; then
-	echo -e "${white}\n[ ${red}+${white} ] Okay good! lets try again boy XD"
+	echo -e "${white}[ ${red}+${white} ] Okay good! lets try again boy XD"
 	bash brute.sh
 elif [[ $ask_again == "N" || $ask_again == "n" ]]; then
-	echo -e "${white}\n[ ${red}+${white} ] See u :)"
+	echo -e "${white}[ ${red}+${white} ] See u boy:*"
 	rm *.tmp*
 else
 	rm *.tmp*
